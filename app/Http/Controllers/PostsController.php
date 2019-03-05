@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use DB;
 
 class PostsController extends Controller
 {
@@ -13,7 +15,19 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        # Eloquent
+        // $post = Post::all();
+        // $post = Post::where('title', 'Post Two')->get();
+        // $posts = Post::orderBy('title','DESC')->take(1)->get();
+
+
+        # SQL QUERY
+        // $posts = DB::select('SELECT * FROM POSTS ORDER BY title DESC');
+
+        // $posts = Post::orderBy('title','DESC')->get();
+        $posts = Post::orderBy('title','DESC')->paginate(1);
+
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -45,8 +59,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $post = Post::find($id);
+        return view('posts.view', compact('post'));
+    }   
 
     /**
      * Show the form for editing the specified resource.
@@ -56,7 +71,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
