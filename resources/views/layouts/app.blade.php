@@ -1,41 +1,47 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <title>{{ config('app.name', 'LSAPP') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    </head>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <body>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 
-        @include('inc.navbar')
-        
-        <br>
-        
-        <div class="container">
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-            @include('inc.messages')
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
 
-            @yield('content')
+<body>
+    <div id="app">
 
-        </div>
+    @include('inc.navbar')
 
-        </div>
+        <main class="py-4">
+            
+            <div class="container">
+                @include('inc.messages') 
+                @yield('content')
+            </div>
 
-        <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-        <script>
+        </main>
+
+    </div>
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
             CKEDITOR.replace( 'article-ckeditor' );
-        </script>
+    </script>
 
-
-    </body>
+</body>
 
 </html>
-
