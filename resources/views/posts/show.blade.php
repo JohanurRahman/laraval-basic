@@ -7,6 +7,8 @@
 <br>
 
 <h1>{{ $post->title }}</h1>
+<img style="width:50%" src="/storage/cover_images/{{$post->cover_image}}" alt="">
+<br><br>
 <div>
     {!! $post->body !!}
     <!-- Parsing HTML -->
@@ -19,20 +21,26 @@
 
 <p>
 
-    <form>
+    @if (!Auth::guest())
 
-        <a class="btn btn-success float-left" href="/posts/{{$post->id}}/edit" role="button">Edit</a>
-
-    </form>
+        @if (Auth::user()->id == $post->user_id)
     
-    <form action="{{ action('PostsController@destroy', $post->id) }}" method="POST">
+            <form>
+                <a class="btn btn-success float-left" href="/posts/{{$post->id}}/edit" role="button">Edit</a>
+            </form>
+            
+            <form action="{{ action('PostsController@destroy', $post->id) }}" method="POST">
 
-        @method('DELETE') @csrf
+                @method('DELETE') @csrf
 
-        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                <button type="submit" class="btn btn-danger float-right">Delete</button>
 
-    </form>
+            </form>
 
+        @endif
+            
+
+    @endif
 
 
 </p>

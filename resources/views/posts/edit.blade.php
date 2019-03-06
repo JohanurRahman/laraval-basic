@@ -1,33 +1,35 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('content')
 
-    <a href="/posts/{{$post->id}}" class="btn btn-primary">Back</a>
-    
-    <br>
-    <br>
-    
-    <h1>Edit Post</h1>
+<a href="/posts/{{$post->id}}" class="btn btn-primary">Back</a>
 
-    <br>
-    <form action="{{ action('PostsController@update', $post->id) }}" method="POST">
+<br>
+<br>
 
-        @method('PUT')
-        @csrf
+<h1>Edit Post</h1>
 
-        <div class="form-group">
+<br>
+<form action="{{ action('PostsController@update', $post->id) }}" method="POST" enctype="multipart/form-data">
+
+    @method('PUT') 
+    @csrf
+
+    <div class="form-group">
         <label for="title">Title</label>
         <input type="text" value="{{ $post->title }}" class="form-control" name="title" id="title" placeholder="Enter Title">
-        </div>
+    </div>
 
-        <div class="form-group">
+    <div class="form-group">
         <label for="body">Body</label>
         <textarea name="body" id="article-ckeditor" class="form-control" placeholder="Enter Body Text" cols="30" rows="10">{{ $post->body }}</textarea>
-        </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        <input type="file" name="cover_image">
+    </div>
 
-    </form>
 
+    <button type="submit" class="btn btn-primary">Submit</button>
 
+</form>
 @endsection

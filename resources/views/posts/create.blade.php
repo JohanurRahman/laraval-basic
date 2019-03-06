@@ -4,7 +4,7 @@
   <h1>Create Post</h1>
 
   <br>
-  <form action="{{ action('PostsController@store') }}" method="POST">
+  <form action="{{ action('PostsController@store') }}" method="POST" enctype="multipart/form-data">
 
     @csrf
 
@@ -17,6 +17,11 @@
       <label for="body">Body</label>
       <textarea name="body" id="article-ckeditor" class="form-control" placeholder="Enter Body Text" cols="30" rows="10"></textarea>
     </div>
+
+    <div class="form-group">
+      <input type="file" name="cover_image">
+    </div>
+
 
     <button type="submit" class="btn btn-primary">Submit</button>
 
